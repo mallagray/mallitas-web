@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mallitas — Que nadie que quieras este solo</title>
-  <meta name="description" content="Compania diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
-  <meta property="og:title" content="Mallitas — Que nadie que quieras este solo" />
-  <meta property="og:description" content="Compania diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
+  <title>Mallitas — Que nadie que quieras est&eacute; solo</title>
+  <meta name="description" content="Compa&ntilde;&iacute;a diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
+  <meta property="og:title" content="Mallitas — Que nadie que quieras est&eacute; solo" />
+  <meta property="og:description" content="Compa&ntilde;&iacute;a diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -182,7 +182,7 @@
       font-weight: 500;
       padding: 16px 28px;
       border-radius: 100px;
-      border: 2px solid var(--border);
+      border: 2px solid #d4cdc4;
       cursor: pointer;
       transition: border-color 0.2s, transform 0.2s;
     }
@@ -192,7 +192,7 @@
     }
 
     /* ============================================================
-       PHONE MOCKUP — REALISTIC iPHONE STYLE
+       PHONE MOCKUP
     ============================================================ */
     .phone-frame {
       width: 260px;
@@ -200,13 +200,12 @@
       border-radius: 44px;
       padding: 14px;
       box-shadow:
-        0 50px 100px rgba(0,0,0,0.15),
-        0 20px 40px rgba(0,0,0,0.1),
+        0 50px 100px rgba(44,37,34,0.12),
+        0 20px 40px rgba(44,37,34,0.08),
         inset 0 1px 0 rgba(255,255,255,0.1),
-        inset 0 -1px 0 rgba(0,0,0,0.3);
+        inset 0 -1px 0 rgba(44,37,34,0.3);
       position: relative;
     }
-    /* Dynamic island */
     .phone-frame::before {
       content: '';
       position: absolute;
@@ -215,7 +214,7 @@
       transform: translateX(-50%);
       width: 90px;
       height: 28px;
-      background: #000;
+      background: #1a1a1a;
       border-radius: 20px;
       z-index: 10;
     }
@@ -279,13 +278,13 @@
       background: white;
       align-self: flex-start;
       border-top-left-radius: 2px;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 1px rgba(44,37,34,0.06);
     }
     .wa-bubble.out {
       background: var(--green-light);
       align-self: flex-end;
       border-top-right-radius: 2px;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 1px rgba(44,37,34,0.06);
     }
     .wa-time {
       font-size: 0.58rem;
@@ -298,27 +297,6 @@
       gap: 3px;
     }
     .wa-ticks { color: #4fc3f7; font-size: 0.62rem; }
-    .wa-typing {
-      background: white;
-      align-self: flex-start;
-      border-radius: 8px;
-      border-top-left-radius: 2px;
-      padding: 8px 12px;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
-    }
-    .wa-typing-dots {
-      display: flex;
-      gap: 3px;
-    }
-    .wa-typing-dots span {
-      width: 5px;
-      height: 5px;
-      background: #bbb;
-      border-radius: 50%;
-      animation: bounce 1.2s infinite;
-    }
-    .wa-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .wa-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
     .phone-float { animation: float 6s ease-in-out infinite; }
 
@@ -362,11 +340,11 @@
       }
     }
     .hero-label {
-      font-size: 0.75rem;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--muted);
       margin-bottom: 20px;
       font-family: 'DM Sans', sans-serif;
     }
@@ -380,7 +358,7 @@
       letter-spacing: -0.02em;
     }
     .hero-sub {
-      font-size: 1.125rem;
+      font-size: 18px;
       color: var(--text-secondary);
       line-height: 1.8;
       margin-bottom: 40px;
@@ -395,13 +373,13 @@
     }
     .hero-ctas-note {
       width: 100%;
-      font-size: 0.8rem;
+      font-size: 13px;
       color: var(--muted);
       margin-top: 4px;
       font-family: 'DM Sans', sans-serif;
     }
 
-    /* Hero visual: illustration */
+    /* Hero visual: illustration floating naturally */
     .hero-visual {
       position: relative;
       display: flex;
@@ -409,9 +387,9 @@
       align-items: center;
     }
     .hero-illustration {
-      max-width: 480px;
+      max-width: 420px;
       width: 100%;
-      filter: drop-shadow(0 20px 40px rgba(44,37,34,0.1));
+      /* No border, no shadow, no frame — floats naturally */
     }
 
     /* ============================================================
@@ -422,7 +400,7 @@
       background: var(--bg);
     }
     .editorial {
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto;
       text-align: center;
     }
@@ -434,14 +412,14 @@
     }
     .editorial h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: 2.25rem;
+      font-size: 36px;
       font-weight: 400;
       color: var(--text);
       margin-bottom: 40px;
       line-height: 1.25;
     }
     .editorial p {
-      font-size: 1.0625rem;
+      font-size: 17px;
       color: var(--text-editorial);
       line-height: 1.9;
       margin-bottom: 24px;
@@ -450,16 +428,16 @@
     .editorial p:last-of-type {
       color: var(--text);
       font-weight: 500;
-      font-size: 1.1rem;
+      font-size: 17px;
     }
     .editorial-illustration {
-      max-width: 360px;
-      margin: 56px auto 0;
-      filter: drop-shadow(0 8px 24px rgba(44,37,34,0.08));
+      max-width: 280px;
+      margin: 40px auto 0;
+      /* No border, no shadow — floats naturally */
     }
 
     /* ============================================================
-       ACTIVITIES — ILLUSTRATION-DRIVEN
+       ACTIVITIES
     ============================================================ */
     #actividades {
       padding: 100px 24px;
@@ -484,9 +462,10 @@
       font-family: 'DM Sans', sans-serif;
     }
     .actividades-illustration {
-      max-width: 700px;
+      max-width: 500px;
       margin: 0 auto 48px;
       display: block;
+      /* No border, no shadow — watercolor icons ARE the design */
     }
     .marquee-wrap {
       overflow: hidden;
@@ -507,17 +486,17 @@
       background: white;
       border: 1.5px solid #d4cdc4;
       border-radius: 50px;
-      font-size: 0.8125rem;
+      font-size: 13px;
       font-weight: 500;
       color: var(--text-editorial);
       font-family: 'DM Sans', sans-serif;
     }
 
     /* ============================================================
-       MEMORY DEMO — WARM SECTION
+       MEMORY DEMO
     ============================================================ */
     #memory {
-      background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg) 100%);
+      background: var(--bg);
       padding: 100px 24px;
       position: relative;
       overflow: hidden;
@@ -525,24 +504,6 @@
     .memory-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-    }
-    .memory-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .memory-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2rem, 4vw, 2.5rem);
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.25;
-    }
-    .memory-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      font-family: 'DM Sans', sans-serif;
     }
     .memory-grid {
       display: grid;
@@ -558,33 +519,44 @@
         gap: 56px;
       }
     }
+    .memory-left-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .memory-left-header p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 32px;
+    }
     .memory-illustration {
-      max-width: 350px;
+      max-width: 340px;
       width: 100%;
-      filter: drop-shadow(0 8px 24px rgba(44,37,34,0.08));
+      /* No border, no frame — floats naturally */
     }
 
-    /* Testimonial card */
-    .testimonial-card {
+    /* Testimonial */
+    .testimonial {
       max-width: 600px;
       margin: 0 auto;
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: left;
+      text-align: center;
     }
     .testimonial-text {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 1.0625rem;
-      color: var(--text);
+      font-size: 18px;
+      color: var(--text-editorial);
       line-height: 1.7;
       margin-bottom: 12px;
     }
     .testimonial-name {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.875rem;
+      font-size: 14px;
       color: var(--text-secondary);
     }
 
@@ -592,7 +564,7 @@
        HOW IT WORKS
     ============================================================ */
     #como-funciona {
-      background: var(--bg);
+      background: var(--bg-cream);
       padding: 100px 24px;
     }
     .steps-inner {
@@ -623,20 +595,20 @@
     }
     .step-num {
       font-family: 'DM Serif Display', serif;
-      font-size: 4.5rem;
+      font-size: 72px;
       color: var(--border);
       line-height: 1;
       margin-bottom: 16px;
     }
     .step h3 {
       font-family: 'DM Sans', sans-serif;
-      font-size: 1.125rem;
+      font-size: 18px;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 8px;
     }
     .step p {
-      font-size: 0.9375rem;
+      font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.65;
       font-family: 'DM Sans', sans-serif;
@@ -647,7 +619,7 @@
     ============================================================ */
     #precio {
       padding: 100px 24px;
-      background: var(--bg-cream);
+      background: var(--bg);
     }
     .pricing-inner {
       max-width: var(--max-width);
@@ -656,7 +628,7 @@
     }
     .pricing-inner > h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.6rem, 3.5vw, 2rem);
+      font-size: 32px;
       font-weight: 400;
       color: var(--text);
       margin-bottom: 12px;
@@ -734,13 +706,13 @@
     .pricing-gift a:hover { color: var(--green-dark); }
     .pricing-note {
       text-align: center;
-      font-size: 0.8125rem;
+      font-size: 13px;
       color: var(--muted);
       font-family: 'DM Sans', sans-serif;
     }
 
     /* ============================================================
-       FOOTER — WARM BROWN
+       FOOTER
     ============================================================ */
     #footer {
       background: var(--footer-bg);
@@ -783,7 +755,7 @@
     ============================================================ */
     @media (max-width: 1023px) {
       .hero-illustration {
-        max-width: 360px;
+        max-width: 340px;
       }
     }
     @media (max-width: 768px) {
@@ -798,13 +770,19 @@
         padding: 36px 24px;
       }
       .hero-illustration {
-        max-width: 300px;
-      }
-      .testimonial-card {
-        padding: 32px 24px;
+        max-width: 280px;
       }
       .memory-grid {
         gap: 32px;
+      }
+      .memory-left-header h2 {
+        font-size: 32px;
+      }
+      .actividades-illustration {
+        max-width: 360px;
+      }
+      .editorial-illustration {
+        max-width: 220px;
       }
     }
   </style>
@@ -812,45 +790,45 @@
 <body>
 
   <!-- NAV -->
-  <nav id="nav" role="navigation" aria-label="Navegacion principal">
+  <nav id="nav" role="navigation" aria-label="Navegaci&oacute;n principal">
     <div class="nav-inner">
       <a href="#" class="nav-logo">Mallitas</a>
       <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="nav-cta" target="_blank" rel="noopener">
-        Pruebalo gratis
+        Pru&eacute;balo gratis
       </a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section id="hero" aria-label="Presentacion">
+  <section id="hero" aria-label="Presentaci&oacute;n">
     <div class="hero-glow"></div>
     <div class="hero-inner">
 
       <div>
-        <div class="hero-label fade-up">COMPANIA POR WHATSAPP</div>
-        <h1 class="hero-h1 fade-up d1">Que nadie que quieras este solo</h1>
+        <div class="hero-label fade-up">COMPA&Ntilde;&Iacute;A POR WHATSAPP</div>
+        <h1 class="hero-h1 fade-up d1">Que nadie que quieras est&eacute; solo</h1>
         <p class="hero-sub fade-up d2">
-          Mallitas habla con tu padre, tu madre, tu abuelo. Cada dia. Por WhatsApp. De lo que a ellos les importa.
+          Mallitas habla con tu padre, tu madre, tu abuelo. Cada d&iacute;a. Por WhatsApp. De lo que a ellos les importa.
         </p>
         <div class="hero-ctas fade-up d3">
           <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn-green" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
-            Pruebalo gratis 15 dias
+            Pru&eacute;balo gratis 15 d&iacute;as
           </a>
           <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" class="btn-outline" target="_blank" rel="noopener">
-            Regalaselo
+            Reg&aacute;laselo
           </a>
           <span class="hero-ctas-note">Sin instalar nada &middot; Solo WhatsApp</span>
         </div>
       </div>
 
-      <!-- Hero visual: hand-drawn illustration -->
+      <!-- Hero visual: abuela-1 watercolor illustration -->
       <div class="hero-visual fade-up d4">
         <img
-          src="img/hero.png"
-          alt="Ilustracion de abuela con Mallitas"
+          src="img/abuela-1.png"
+          alt="Abuela en su sill&oacute;n hablando por WhatsApp con Mallitas"
           class="hero-illustration"
           loading="eager"
         />
@@ -860,22 +838,22 @@
   </section>
 
   <!-- WHAT IS MALLITAS — EDITORIAL -->
-  <section id="que-es" aria-label="Que es Mallitas">
+  <section id="que-es" aria-label="Qu&eacute; es Mallitas">
     <div class="editorial">
       <div class="editorial-line fade-up"></div>
       <h2 class="fade-up d1">Un amigo que siempre tiene tiempo</h2>
       <p class="fade-up d2">
-        Mallitas es un companero que vive en WhatsApp. No hace falta instalar nada. No hace falta aprender nada nuevo. Solo hablar, como con un amigo de toda la vida.
+        Mallitas es un compa&ntilde;ero que vive en WhatsApp. No hace falta instalar nada. No hace falta aprender nada nuevo. Solo hablar, como con un amigo de toda la vida.
       </p>
       <p class="fade-up d3">
-        Cada manana, Mallitas saluda. Pregunta como estas. Recuerda que ayer tenias cita con el medico. Sabe que tu equipo gano anoche. Se acuerda de la receta de croquetas que le contaste el martes.
+        Cada ma&ntilde;ana, Mallitas saluda. Pregunta c&oacute;mo est&aacute;s. Recuerda que ayer ten&iacute;as cita con el m&eacute;dico. Sabe que tu equipo gan&oacute; anoche. Se acuerda de la receta de croquetas que le contaste el martes.
       </p>
       <p class="fade-up d4">
-        No es un chatbot. No es una app. Es compania de verdad, cada dia.
+        No es un chatbot. No es una app. Es compa&ntilde;&iacute;a de verdad, cada d&iacute;a.
       </p>
       <img
-        src="img/illustration-2.png"
-        alt="Mujer mayor usando WhatsApp con Mallitas"
+        src="img/abuela-2.png"
+        alt="Abuela con chaqueta verde usando WhatsApp"
         class="editorial-illustration fade-up"
         loading="lazy"
       />
@@ -890,39 +868,45 @@
     </div>
 
     <img
-      src="img/illustration-4.png"
-      alt="Actividades de Mallitas: rezar, cocinar, recordar, jugar, pensar"
+      src="img/icons-1.png"
+      alt="Iconos en acuarela: rezar, cocinar, leer, f&uacute;tbol, crucigramas, escribir, pasear, caminar"
       class="actividades-illustration fade-up d1"
       loading="lazy"
     />
 
     <div class="marquee-wrap fade-up d2">
       <div class="marquee-track" aria-hidden="true">
-        <span class="pill">Poesia</span>
-        <span class="pill">Karaoke</span>
-        <span class="pill">Santos del dia</span>
-        <span class="pill">Paseos</span>
-        <span class="pill">Fotos y recuerdos</span>
-        <span class="pill">Preparar citas medicas</span>
-        <span class="pill">Futbol</span>
+        <span class="pill">Rezar juntos</span>
+        <span class="pill">Cantar</span>
+        <span class="pill">Cocinar</span>
+        <span class="pill">F&uacute;tbol</span>
         <span class="pill">Libro de vida</span>
         <span class="pill">Crucigramas</span>
-        <span class="pill">Medicacion</span>
+        <span class="pill">Paseos</span>
+        <span class="pill">Medicaci&oacute;n</span>
+        <span class="pill">Poes&iacute;a</span>
+        <span class="pill">Karaoke</span>
         <span class="pill">Trivial</span>
         <span class="pill">Recetario</span>
+        <span class="pill">Santos del d&iacute;a</span>
+        <span class="pill">Citas m&eacute;dicas</span>
+        <span class="pill">Fotos</span>
         <!-- duplicate for seamless loop -->
-        <span class="pill">Poesia</span>
-        <span class="pill">Karaoke</span>
-        <span class="pill">Santos del dia</span>
-        <span class="pill">Paseos</span>
-        <span class="pill">Fotos y recuerdos</span>
-        <span class="pill">Preparar citas medicas</span>
-        <span class="pill">Futbol</span>
+        <span class="pill">Rezar juntos</span>
+        <span class="pill">Cantar</span>
+        <span class="pill">Cocinar</span>
+        <span class="pill">F&uacute;tbol</span>
         <span class="pill">Libro de vida</span>
         <span class="pill">Crucigramas</span>
-        <span class="pill">Medicacion</span>
+        <span class="pill">Paseos</span>
+        <span class="pill">Medicaci&oacute;n</span>
+        <span class="pill">Poes&iacute;a</span>
+        <span class="pill">Karaoke</span>
         <span class="pill">Trivial</span>
         <span class="pill">Recetario</span>
+        <span class="pill">Santos del d&iacute;a</span>
+        <span class="pill">Citas m&eacute;dicas</span>
+        <span class="pill">Fotos</span>
       </div>
     </div>
   </section>
@@ -930,14 +914,14 @@
   <!-- MEMORY DEMO -->
   <section id="memory" aria-label="Memoria">
     <div class="memory-inner">
-      <div class="memory-header fade-up">
-        <h2>Recuerda todo</h2>
-        <p class="memory-subtitle">Nombres, recetas, fechas. Cada conversacion importa.</p>
-      </div>
 
       <div class="memory-grid">
-        <!-- Phone mockup -->
+        <!-- Left: header + phone -->
         <div class="fade-up d1">
+          <div class="memory-left-header">
+            <h2>Recuerda todo</h2>
+            <p>Nombres, recetas, fechas. Cada conversaci&oacute;n importa.</p>
+          </div>
           <div class="phone-float">
             <div class="phone-frame">
               <div class="phone-screen">
@@ -945,28 +929,28 @@
                   <div class="wa-avatar">M</div>
                   <div>
                     <div class="wa-name">Mallitas</div>
-                    <div class="wa-status">en linea</div>
+                    <div class="wa-status">en l&iacute;nea</div>
                   </div>
                 </div>
                 <div class="wa-chat">
                   <div class="wa-bubble in">
-                    Buenas tardes, Carmen! Que tal las croquetas? Me dijiste el martes que les faltaba nuez moscada.
+                    Buenas tardes, Carmen &#128522; &iquest;Qu&eacute; tal las croquetas? Me dijiste el martes que les faltaba nuez moscada.
                     <div class="wa-time">16:20</div>
                   </div>
                   <div class="wa-bubble out">
-                    Las repeti ayer y salieron bordadas!
+                    &iexcl;Las repet&iacute; y salieron bordadas!
                     <div class="wa-time">16:22 <span class="wa-ticks">&#10003;&#10003;</span></div>
                   </div>
                   <div class="wa-bubble in">
-                    Que alegria! La guardo en tu recetario. Por cierto, manana cumple 8 anos tu nieta Lucia.
+                    &iexcl;Qu&eacute; alegr&iacute;a! &#128221; Ma&ntilde;ana cumple 8 a&ntilde;os tu nieta Luc&iacute;a.
                     <div class="wa-time">16:22</div>
                   </div>
                   <div class="wa-bubble out">
-                    Es verdad! Tengo que llamar a mi hijo
+                    &iexcl;Tengo que llamar a mi hijo!
                     <div class="wa-time">16:24 <span class="wa-ticks">&#10003;&#10003;</span></div>
                   </div>
                   <div class="wa-bubble in">
-                    Me contaste que a Lucia le encantan los puzzles. Te recuerdo llamar a Carlos a las 19:00?
+                    Me contaste que a Luc&iacute;a le encantan los puzzles. &iquest;Te recuerdo llamar a Carlos a las 19:00?
                     <div class="wa-time">16:24</div>
                   </div>
                 </div>
@@ -975,21 +959,21 @@
           </div>
         </div>
 
-        <!-- Togetherness illustration -->
-        <div class="fade-up d2">
+        <!-- Right: manos-2 illustration -->
+        <div class="fade-up d2" style="display:flex;align-items:center;justify-content:center;">
           <img
-            src="img/illustration-5.png"
-            alt="Manos sosteniendo un telefono con WhatsApp, collage de recuerdos"
+            src="img/manos-2.png"
+            alt="Manos sosteniendo un tel&eacute;fono con coraz&oacute;n"
             class="memory-illustration"
             loading="lazy"
           />
         </div>
       </div>
 
-      <!-- Testimonial card -->
-      <div class="testimonial-card fade-up d3">
+      <!-- Testimonial -->
+      <div class="testimonial fade-up d3">
         <p class="testimonial-text">
-          &laquo;Mi madre vive sola en el pueblo. Desde que tiene a Mallitas, me llama para contarme lo que han hablado. Esta mas animada que nunca.&raquo;
+          &laquo;Mi madre vive sola en el pueblo. Desde que tiene a Mallitas, me llama para contarme lo que han hablado. Est&aacute; m&aacute;s animada que nunca.&raquo;
         </p>
         <p class="testimonial-name">&mdash; Laura M., Madrid</p>
       </div>
@@ -997,14 +981,14 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="como-funciona" aria-label="Como funciona">
+  <section id="como-funciona" aria-label="C&oacute;mo funciona">
     <div class="steps-inner">
-      <h2 class="fade-up">Asi de facil</h2>
+      <h2 class="fade-up">As&iacute; de f&aacute;cil</h2>
       <div class="steps-row">
         <div class="step fade-up">
           <div class="step-num">01</div>
           <h3>Danos su WhatsApp</h3>
-          <p>Solo el numero. Sin apps, sin registro.</p>
+          <p>Solo el n&uacute;mero. Sin apps, sin registro.</p>
         </div>
         <div class="step fade-up d1">
           <div class="step-num">02</div>
@@ -1014,7 +998,7 @@
         <div class="step fade-up d2">
           <div class="step-num">03</div>
           <h3>Se adapta</h3>
-          <p>Cada dia, habla de lo que le importa.</p>
+          <p>Cada d&iacute;a, habla de lo que le importa.</p>
         </div>
       </div>
     </div>
@@ -1023,11 +1007,11 @@
   <!-- PRICING -->
   <section id="precio" aria-label="Precio">
     <div class="pricing-inner">
-      <h2 class="fade-up">15 dias gratis. Despues, 4,90&euro; al mes.</h2>
-      <p class="pricing-sub fade-up d1">Un cafe a la semana. Sin permanencia.</p>
+      <h2 class="fade-up">15 d&iacute;as gratis. Despu&eacute;s, 4,90&euro; al mes.</h2>
+      <p class="pricing-sub fade-up d1">Un caf&eacute; a la semana. Sin permanencia.</p>
 
       <div class="pricing-card fade-up d2">
-        <div class="pricing-badge">15 dias gratis</div>
+        <div class="pricing-badge">15 d&iacute;as gratis</div>
 
         <ul class="pricing-features">
           <li>
@@ -1035,7 +1019,7 @@
               <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
               <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Conversacion diaria personalizada
+            Conversaci&oacute;n diaria personalizada
           </li>
           <li>
             <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -1049,14 +1033,14 @@
               <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
               <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Memoria real — recuerda todo
+            Memoria real &mdash; recuerda todo
           </li>
           <li>
             <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
               <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Recordatorios amables de medicacion
+            Recordatorios amables de medicaci&oacute;n
           </li>
           <li>
             <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -1072,20 +1056,20 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
-            Pruebalo gratis 15 dias
+            Pru&eacute;balo gratis 15 d&iacute;as
           </a>
         </div>
 
         <p class="pricing-gift">
-          Quieres regalarselo a alguien? <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" target="_blank" rel="noopener">Escribenos.</a>
+          &iquest;Quieres regal&aacute;rselo a alguien? <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" target="_blank" rel="noopener">Escr&iacute;benos.</a>
         </p>
-        <p class="pricing-note">Sin datos compartidos. Sin anuncios. Solo compania.</p>
+        <p class="pricing-note">Sin datos compartidos. Sin anuncios. Solo compa&ntilde;&iacute;a.</p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer id="footer" aria-label="Pie de pagina">
+  <footer id="footer" aria-label="Pie de p&aacute;gina">
     <div class="footer-inner">
       <div class="footer-logo">Mallitas</div>
       <nav class="footer-links" aria-label="Enlaces del pie">
