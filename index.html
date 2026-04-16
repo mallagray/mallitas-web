@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mallitas — Un amigo por WhatsApp para quien más quieres</title>
+  <meta name="description" content="Compañía diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
+  <meta property="og:title" content="Mallitas — Un amigo por WhatsApp para quien más quieres" />
+  <meta property="og:description" content="Compañía diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2325D366'/%3E%3Ctext x='16' y='21' font-family='Inter,sans-serif' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --green:         #25D366;
+      --green-dark:    #075e54;
+      --green-light:   #dcf8c6;
+      --green-bg:      #f0f7f0;
+      --green-subtle:  #e8f5e9;
+      --wa-bg:         #efeae2;
+      --wa-header:     #075e54;
+      --text-primary:  #1a2a3a;
+      --text-secondary:#4a6a7a;
+      --text-muted:    #8a9aaa;
+      --bg-white:      #ffffff;
+      --bg-light:      #f8fafb;
+      --bg-dark:       #1a2a3a;
+      --border:        #e0e8ef;
+      --radius-sm:     8px;
+      --radius-md:     14px;
+      --radius-lg:     20px;
+      --radius-xl:     40px;
+      --shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:     0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-lg:     0 12px 40px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.08);
+      --max-width:     1200px;
+      --section-padding: 100px 24px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #nav.scrolled {
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--green-dark); }
+    .nav-cta {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--green);
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: var(--radius-xl);
+        transition: background 0.15s, transform 0.15s;
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        background: var(--green-dark);
+        transform: translateY(-1px);
+      }
+    }
+    .nav-mobile-hidden {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .nav-mobile-hidden { display: flex; }
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: var(--radius-xl);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: #1db954;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    }
+    .btn-primary svg { flex-shrink: 0; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--green-dark); }
+
+    /* ============================================================
+       SECTION WRAPPER
+    ============================================================ */
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--section-padding);
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-title.light { color: white; }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+    .section-subtitle.light { color: rgba(255,255,255,0.6); }
+
+    .centered {
+      text-align: center;
+    }
+    .centered .section-subtitle {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       PHONE MOCKUP — SHARED
+    ============================================================ */
+    .phone-wrap {
+      position: relative;
+      width: 300px;
+      flex-shrink: 0;
+    }
+    .phone-shell {
+      width: 300px;
+      height: 620px;
+      background: white;
+      border-radius: 40px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #e0e0e0;
+    }
+    .phone-shell.dark-border {
+      border-color: #333;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 6px;
+      background: #ccc;
+      border-radius: 3px;
+      z-index: 10;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--wa-bg);
+    }
+    .wa-header {
+      background: var(--wa-header);
+      padding: 30px 14px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .wa-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    .wa-header-info { flex: 1; min-width: 0; }
+    .wa-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      line-height: 1.2;
+    }
+    .wa-status {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .wa-chat {
+      flex: 1;
+      overflow: hidden;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      /* subtle pattern */
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='%23efeae2'/%3E%3Cpath d='M30 5C17.3 5 7 15.3 7 28s10.3 23 23 23 23-10.3 23-23S42.7 5 30 5zm0 42C18.9 47 10 38.1 10 27s8.9-20 20-20 20 8.9 20 20-8.9 20-20 20z' fill='%23e5ddd5' fill-opacity='.25'/%3E%3C/svg%3E");
+    }
+    .wa-bubble {
+      max-width: 88%;
+      padding: 7px 10px 5px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      position: relative;
+    }
+    .wa-bubble.incoming {
+      background: white;
+      align-self: flex-start;
+      border-top-left-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    }
+    .wa-bubble.outgoing {
+      background: var(--green-light);
+      align-self: flex-end;
+      border-top-right-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    }
+    .wa-time {
+      font-size: 0.6rem;
+      color: #9aa;
+      text-align: right;
+      margin-top: 2px;
+    }
+    .wa-bubble.outgoing .wa-time {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 3px;
+    }
+    .wa-ticks {
+      color: #4fc3f7;
+      font-size: 0.65rem;
+    }
+    /* typing indicator */
+    .wa-typing {
+      background: white;
+      align-self: flex-start;
+      border-radius: 8px;
+      border-top-left-radius: 2px;
+      padding: 8px 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    }
+    .wa-typing-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .wa-typing-dots span {
+      width: 6px;
+      height: 6px;
+      background: #bbb;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .wa-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .wa-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    /* ============================================================
+       SECTION 2 — HERO
+    ============================================================ */
+    #hero {
+      padding-top: 64px;
+      background: linear-gradient(135deg, var(--green-subtle) 0%, #e8f4f8 50%, var(--bg-light) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+    .hero-content {}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+    .hero-h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.13;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--green-dark);
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 500px;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    @media (min-width: 480px) {
+      .hero-ctas {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+    .hero-phone-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* floating decoration behind phone */
+    .hero-phone-bg {
+      position: relative;
+    }
+    .hero-phone-bg::before {
+      content: '';
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(37,211,102,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .hero-phone-bg .phone-wrap { z-index: 1; }
+
+    /* ============================================================
+       SECTION 3 — COMO FUNCIONA
+    ============================================================ */
+    #como-funciona {
+      background: var(--green-bg);
+    }
+    .steps-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .steps-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .steps-row::before {
+        content: '';
+        position: absolute;
+        top: 36px;
+        left: calc(16.67% + 20px);
+        right: calc(16.67% + 20px);
+        height: 2px;
+        background: linear-gradient(to right, var(--green), var(--green-dark), var(--green));
+        z-index: 0;
+      }
+    }
+    .step-card {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .step-number {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      position: relative;
+    }
+    .step-number::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.3);
+    }
+    .step-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       SECTION 4 — ACTIVIDADES
+    ============================================================ */
+    #actividades {
+      background: var(--bg-white);
+    }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .activities-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .activity-card {
+      background: var(--bg-light);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .activity-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--green);
+      box-shadow: var(--shadow-md);
+    }
+    .activity-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--green-subtle);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .activity-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .activity-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ============================================================
+       SECTION 5 — MEMORY DEMO
+    ============================================================ */
+    #memory {
+      background: var(--bg-dark);
+    }
+    #memory .section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .memory-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37,211,102,0.15);
+      border: 1px solid rgba(37,211,102,0.3);
+      border-radius: var(--radius-xl);
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       SECTION 6 — METRICS
+    ============================================================ */
+    #metrics {
+      background: var(--bg-white);
+    }
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    @media (min-width: 600px) {
+      .metrics-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .metric-item {
+      text-align: center;
+    }
+    .metric-number {
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .metric-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .metrics-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      display: none;
+    }
+    @media (min-width: 600px) {
+      .metrics-divider { display: block; }
+    }
+
+    /* ============================================================
+       SECTION 7 — PRICING
+    ============================================================ */
+    #precio {
+      background: var(--green-bg);
+    }
+    .pricing-card {
+      background: white;
+      border: 2px solid var(--green);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .pricing-badge {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 6px 18px;
+      border-radius: var(--radius-xl);
+      margin-bottom: 24px;
+    }
+    .pricing-price {
+      font-size: clamp(3rem, 8vw, 4rem);
+      font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pricing-period {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      background: var(--green-subtle);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-icon svg { display: block; }
+    .pricing-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+    .pricing-secondary {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--green-dark);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .pricing-secondary:hover { color: var(--green); }
+
+    /* ============================================================
+       SECTION 8 — FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--bg-dark);
+      padding: 48px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       SECTION 1 — NAV
+  ============================================================ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Mallitas</a>
+      <ul class="nav-links nav-mobile-hidden">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#actividades">Actividades</a></li>
+        <li><a href="#precio">Precio</a></li>
+      </ul>
+      <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="nav-cta" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Activar
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SECTION 2 — HERO
+  ============================================================ -->
+  <section id="hero" aria-label="Presentación">
+    <div class="hero-inner">
+
+      <!-- LEFT: copy -->
+      <div class="hero-content">
+        <div class="hero-badge fade-up">
+          <span class="hero-badge-dot"></span>
+          Compañía por WhatsApp para mayores
+        </div>
+
+        <h1 class="hero-h1 fade-up">
+          Tu padre ya usa WhatsApp.<br>
+          <em>Ahora tiene a Mallitas.</em>
+        </h1>
+
+        <p class="hero-sub fade-up">
+          Un compañero inteligente que habla con ellos cada día por WhatsApp.
+          Reza, canta, cocina, recuerda, charla de fútbol.
+          Se adapta a lo que les gusta. Y nunca se olvida de preguntar cómo están.
+        </p>
+
+        <div class="hero-ctas fade-up">
+          <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn-primary" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Pruébalo gratis 15 días
+          </a>
+          <a href="#como-funciona" class="btn-ghost">¿Cómo funciona? →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: phone mockup -->
+      <div class="hero-phone-wrap fade-up">
+        <div class="hero-phone-bg">
+          <div class="phone-wrap">
+            <div class="phone-shell">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <!-- WhatsApp header -->
+                <div class="wa-header">
+                  <div class="wa-avatar">M</div>
+                  <div class="wa-header-info">
+                    <div class="wa-name">Mallitas</div>
+                    <div class="wa-status">en línea</div>
+                  </div>
+                  <!-- icons placeholder -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                </div>
+                <!-- Chat -->
+                <div class="wa-chat">
+                  <!-- Mallitas incoming -->
+                  <div class="wa-bubble incoming">
+                    ¡Buenos días, Antonio! ☀️ Ayer el Betis ganó 2-1 al Sevilla. Menudo partido, ¿no? ¿Lo viste?
+                    <div class="wa-time">9:05</div>
+                  </div>
+                  <!-- Antonio outgoing -->
+                  <div class="wa-bubble outgoing">
+                    ¡No me lo perdí! Ese gol de Isco en el 89 fue espectacular
+                    <div class="wa-time">9:08 <span class="wa-ticks">✓✓</span></div>
+                  </div>
+                  <!-- Mallitas incoming -->
+                  <div class="wa-bubble incoming">
+                    ¡Golazo! Oye, ¿hoy toca pastilla de la tensión a las 10? 💊
+                    <div class="wa-time">9:08</div>
+                  </div>
+                  <!-- Antonio outgoing -->
+                  <div class="wa-bubble outgoing">
+                    Es verdad, casi se me olvida. Gracias 👍
+                    <div class="wa-time">9:10 <span class="wa-ticks">✓✓</span></div>
+                  </div>
+                  <!-- Mallitas incoming -->
+                  <div class="wa-bubble incoming">
+                    De nada 😊 Luego si quieres hacemos el crucigrama del día, ayer te quedaste a una palabra
+                    <div class="wa-time">9:10</div>
+                  </div>
+                  <!-- typing -->
+                  <div class="wa-typing">
+                    <div class="wa-typing-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — COMO FUNCIONA
+  ============================================================ -->
+  <section id="como-funciona" aria-label="Cómo funciona">
+    <div class="section-inner">
+      <div class="centered">
+        <span class="section-eyebrow fade-up">Proceso</span>
+        <h2 class="section-title fade-up">Así de fácil</h2>
+        <p class="section-subtitle fade-up">En tres pasos, Mallitas empieza a acompañarle</p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step-card fade-up">
+          <div class="step-number">1</div>
+          <div class="step-title">Danos su WhatsApp</div>
+          <p class="step-desc">Solo necesitamos el número de teléfono. Nada más. Sin apps, sin registro, sin contraseñas.</p>
+        </div>
+
+        <div class="step-card fade-up">
+          <div class="step-number">2</div>
+          <div class="step-title">Mallitas se presenta</div>
+          <p class="step-desc">Le escribe, se presenta con cariño, y le hace unas preguntas para conocerle: nombre, ciudad, gustos.</p>
+        </div>
+
+        <div class="step-card fade-up">
+          <div class="step-number">3</div>
+          <div class="step-title">Se adapta a sus gustos</div>
+          <p class="step-desc">A partir de ahí, cada día le habla de lo que a él o ella le importa. Y va aprendiendo más con cada conversación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — ACTIVIDADES
+  ============================================================ -->
+  <section id="actividades" aria-label="Actividades">
+    <div class="section-inner">
+      <div class="centered">
+        <span class="section-eyebrow fade-up">Actividades</span>
+        <h2 class="section-title fade-up">Todo lo que le gusta, en un solo chat</h2>
+        <p class="section-subtitle fade-up">Mallitas aprende sus gustos y se adapta</p>
+      </div>
+
+      <div class="activities-grid">
+        <div class="activity-card fade-up">
+          <div class="activity-icon">🙏</div>
+          <div class="activity-title">Rezar juntos</div>
+          <p class="activity-desc">Rosario diario, santo del día, oraciones. Reza contigo, no solo envía textos.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">🎵</div>
+          <div class="activity-title">Cantar y recordar</div>
+          <p class="activity-desc">Canciones de su época, letras compartidas, karaoke por audio.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">👨‍🍳</div>
+          <div class="activity-title">Cocinar</div>
+          <p class="activity-desc">Recetario personal, lista de la compra, las recetas de toda la vida.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">⚽</div>
+          <div class="activity-title">Fútbol</div>
+          <p class="activity-desc">Resultados, debate del partido, su equipo. Como charlar en el bar.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">📖</div>
+          <div class="activity-title">Libro de vida</div>
+          <p class="activity-desc">Recuerdos, anécdotas, su biografía. Todo guardado para siempre.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">💊</div>
+          <div class="activity-title">Medicación y citas</div>
+          <p class="activity-desc">Recordatorios amables de pastillas y citas médicas. Sin agobios.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">🧩</div>
+          <div class="activity-title">Crucigramas y trivial</div>
+          <p class="activity-desc">Ejercicio mental diario. Preguntas, acertijos, juegos de palabras.</p>
+        </div>
+
+        <div class="activity-card fade-up">
+          <div class="activity-icon">🚶</div>
+          <div class="activity-title">Paseos</div>
+          <p class="activity-desc">Rutas por su barrio, el clima de hoy, compañía para caminar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — MEMORY DEMO
+  ============================================================ -->
+  <section id="memory" aria-label="Memoria">
+    <div class="section-inner">
+      <div class="memory-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+        </svg>
+        Memoria real
+      </div>
+      <h2 class="section-title light centered fade-up">No es un chatbot. Recuerda todo.</h2>
+      <p class="section-subtitle light centered fade-up">Nombres, recetas, fechas, historias. Cada conversación cuenta.</p>
+
+      <!-- Centered phone -->
+      <div class="hero-phone-wrap fade-up">
+        <div class="phone-wrap">
+          <div class="phone-shell dark-border">
+            <div class="phone-notch" style="background:#555;"></div>
+            <div class="phone-screen">
+              <!-- WhatsApp header -->
+              <div class="wa-header">
+                <div class="wa-avatar">M</div>
+                <div class="wa-header-info">
+                  <div class="wa-name">Mallitas</div>
+                  <div class="wa-status">en línea</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+              </div>
+              <!-- Chat -->
+              <div class="wa-chat">
+                <div class="wa-bubble incoming">
+                  Buenas tardes, Carmen 😊 ¿Qué tal las croquetas que ibas a hacer con la receta de tu madre? Me dijiste el martes que les faltaba un punto de nuez moscada.
+                  <div class="wa-time">16:20</div>
+                </div>
+                <div class="wa-bubble outgoing">
+                  ¡Las repetí ayer y esta vez salieron bordadas! Le puse la pizca de nuez moscada que decías
+                  <div class="wa-time">16:22 <span class="wa-ticks">✓✓</span></div>
+                </div>
+                <div class="wa-bubble incoming">
+                  ¡Qué alegría! La guardo en tu recetario como "Croquetas de mamá — versión definitiva" 📝 Por cierto, mañana es el cumple de tu nieta Lucía, ¿no? Cumple 8 años.
+                  <div class="wa-time">16:22</div>
+                </div>
+                <div class="wa-bubble outgoing">
+                  ¡Es verdad! Tengo que llamar a mi hijo para preguntarle qué le regalo
+                  <div class="wa-time">16:24 <span class="wa-ticks">✓✓</span></div>
+                </div>
+                <div class="wa-bubble incoming">
+                  El mes pasado me contaste que a Lucía le encantaban los puzzles. ¿Quieres que te recuerde llamar a Carlos esta tarde a las 19:00?
+                  <div class="wa-time">16:24</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — METRICS
+  ============================================================ -->
+  <section id="metrics" aria-label="Métricas">
+    <div class="section-inner centered">
+      <span class="section-eyebrow fade-up">En números</span>
+      <h2 class="section-title fade-up">Diseñado para acompañar de verdad</h2>
+      <div class="metrics-row" style="margin-top: 56px;">
+        <div class="metric-item fade-up">
+          <div class="metric-number">28</div>
+          <div class="metric-label">actividades disponibles</div>
+        </div>
+        <div class="metrics-divider fade-up"></div>
+        <div class="metric-item fade-up">
+          <div class="metric-number">5</div>
+          <div class="metric-label">mensajes al día</div>
+        </div>
+        <div class="metrics-divider fade-up"></div>
+        <div class="metric-item fade-up">
+          <div class="metric-number">0</div>
+          <div class="metric-label">apps que instalar</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7 — PRICING
+  ============================================================ -->
+  <section id="precio" aria-label="Precio">
+    <div class="section-inner">
+      <div class="centered">
+        <span class="section-eyebrow fade-up">Precio</span>
+        <h2 class="section-title fade-up">Compañía de verdad, cada día</h2>
+        <p class="section-subtitle fade-up">Sin permanencia. Cancela cuando quieras.</p>
+      </div>
+
+      <div class="pricing-card fade-up">
+        <span class="pricing-badge">15 días gratis</span>
+
+        <div class="pricing-price">4,90€</div>
+        <div class="pricing-period">al mes · después del periodo de prueba</div>
+
+        <ul class="pricing-features">
+          <li>
+            <span class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Conversación diaria personalizada
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            28 actividades: rezar, cantar, cocinar, fútbol, crucigramas...
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Memoria real — recuerda todo lo que le cuentan
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Recordatorios de medicación y citas
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Funciona en WhatsApp — sin instalar nada
+          </li>
+        </ul>
+
+        <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn-primary" style="width: 100%; justify-content: center;" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Pruébalo gratis 15 días
+        </a>
+
+        <p class="pricing-note">Sin datos compartidos. Sin anuncios. Solo compañía.</p>
+        <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas%2C%20quiero%20probarlo%20yo" class="pricing-secondary" target="_blank" rel="noopener">
+          Soy yo quien quiere probarlo →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8 — FOOTER
+  ============================================================ -->
+  <footer id="footer" aria-label="Pie de página">
+    <div class="footer-inner">
+      <div class="footer-logo">Mallitas</div>
+      <nav class="footer-links" aria-label="Enlaces del pie">
+        <a href="#">Privacidad</a>
+        <a href="mailto:hola@mallitas.es">Contacto</a>
+        <a href="#">FAQ</a>
+      </nav>
+      <p class="footer-copy">© 2026 Mallitas. Compañía por WhatsApp para quien más quieres.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // IntersectionObserver for fade-up animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
