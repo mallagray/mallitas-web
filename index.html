@@ -1,1107 +1,320 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mallitas — Que nadie que quieras est&eacute; solo</title>
-  <meta name="description" content="Compa&ntilde;&iacute;a diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
-  <meta property="og:title" content="Mallitas — Que nadie que quieras est&eacute; solo" />
-  <meta property="og:description" content="Compa&ntilde;&iacute;a diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2325D366'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mallitas — Que nadie que quieras esté solo</title>
+  <meta name="description" content="Compañía diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta.">
+  <meta property="og:title" content="Mallitas — Que nadie que quieras esté solo">
+  <meta property="og:description" content="Compañía diaria por WhatsApp para personas mayores. Reza, canta, cocina, recuerda. Se adapta a lo que les gusta.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%2325D366'/><text x='16' y='22' font-family='serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'>M</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
     :root {
       --green: #25D366;
-      --green-dark: #1a7a42;
+      --green-hover: #1eba59;
       --green-light: #dcf8c6;
       --wa-bg: #efeae2;
       --wa-header: #075e54;
       --text: #2c2522;
-      --text-secondary: #78716c;
-      --text-editorial: #5c524c;
+      --text-mid: #5c524c;
+      --text-soft: #78716c;
+      --text-faint: #a39e99;
       --bg: #faf8f5;
-      --bg-cream: #f5f0eb;
+      --cream: #f5f0eb;
       --border: #e7e0d8;
+      --border-light: #ede7df;
       --footer-bg: #5c4a3e;
-      --footer-text: #c4b8ac;
-      --footer-link: #a39990;
-      --footer-copy: #7a706a;
-      --muted: #a39e99;
-      --max-width: 1200px;
+      --max-w: 1120px;
     }
 
-    /* ============================================================
-       KEYFRAMES
-    ============================================================ */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes bounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-4px); }
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'DM Sans', sans-serif;
       color: var(--text);
       background: var(--bg);
-      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
     a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; height: auto; }
 
-    /* ============================================================
-       SCROLL ANIMATIONS
-    ============================================================ */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .fade-up.d1 { transition-delay: 0.08s; }
-    .fade-up.d2 { transition-delay: 0.16s; }
-    .fade-up.d3 { transition-delay: 0.24s; }
-    .fade-up.d4 { transition-delay: 0.32s; }
+    /* Animations */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.on { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .1s; }
+    .reveal.d2 { transition-delay: .2s; }
+    .reveal.d3 { transition-delay: .3s; }
+    @keyframes gentle-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+    @keyframes marquee-scroll { to { transform: translateX(-50%) } }
 
-    /* ============================================================
-       NAV
-    ============================================================ */
-    #nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(250, 248, 245, 0.97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    #nav.scrolled {
-      border-color: var(--border);
-      box-shadow: 0 1px 8px rgba(44,37,34,0.06);
-    }
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      color: var(--text);
-    }
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--green);
-      color: white;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 600;
-      padding: 10px 22px;
-      border-radius: 100px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37,211,102,0.3);
-    }
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(250,248,245,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    nav.scrolled { border-color: var(--border); }
+    .nav-bar { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.35rem; color: var(--text); }
+    .cta-pill { background: var(--green); color: #fff; font-size: .85rem; font-weight: 600; padding: 9px 22px; border-radius: 99px; transition: background .2s, transform .2s; }
+    .cta-pill:hover { background: var(--green-hover); transform: translateY(-1px); }
 
-    /* ============================================================
-       BUTTONS
-    ============================================================ */
-    .btn-green {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--green);
-      color: white;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 16px 32px;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-green:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
-    }
-    .btn-green svg { flex-shrink: 0; }
+    /* ─── Hero ─── */
+    .hero { padding: 120px 28px 80px; max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; min-height: 100vh; }
+    .hero-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 20px; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.15; margin-bottom: 24px; }
+    .hero p { font-size: 1.1rem; line-height: 1.8; color: var(--text-soft); margin-bottom: 36px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .95rem; padding: 15px 30px; border-radius: 99px; border: none; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn-g { background: var(--green); color: #fff; }
+    .btn-g:hover { background: var(--green-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,.3); }
+    .btn-g svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .btn-o { background: transparent; color: var(--text); border: 2px solid var(--border); }
+    .btn-o:hover { border-color: var(--text-soft); transform: translateY(-1px); }
+    .hero-note { font-size: .78rem; color: var(--text-faint); }
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-visual img { max-width: 400px; width: 100%; filter: drop-shadow(0 20px 40px rgba(44,37,34,.08)); }
 
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      padding: 16px 28px;
-      border-radius: 100px;
-      border: 2px solid #d4cdc4;
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .btn-outline:hover {
-      border-color: var(--text-secondary);
-      transform: translateY(-1px);
-    }
+    /* ─── Editorial ─── */
+    .editorial { padding: 100px 28px; max-width: 700px; margin: 0 auto; text-align: center; }
+    .editorial::before { content: ''; display: block; width: 48px; height: 2px; background: var(--border); margin: 0 auto 48px; }
+    .editorial h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 36px; line-height: 1.3; }
+    .editorial p { font-size: 1.05rem; line-height: 1.9; color: var(--text-mid); margin-bottom: 20px; }
+    .editorial p:last-of-type { font-weight: 600; color: var(--text); font-style: italic; }
+    .editorial-img { max-width: 260px; margin: 48px auto 0; filter: drop-shadow(0 12px 24px rgba(44,37,34,.06)); }
 
-    /* ============================================================
-       PHONE MOCKUP
-    ============================================================ */
-    .phone-frame {
-      width: 260px;
-      background: #2a2a2a;
-      border-radius: 44px;
-      padding: 14px;
-      box-shadow:
-        0 50px 100px rgba(44,37,34,0.12),
-        0 20px 40px rgba(44,37,34,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.1),
-        inset 0 -1px 0 rgba(44,37,34,0.3);
-      position: relative;
-    }
-    .phone-frame::before {
-      content: '';
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90px;
-      height: 28px;
-      background: #1a1a1a;
-      border-radius: 20px;
-      z-index: 10;
-    }
-    .phone-screen {
-      border-radius: 32px;
-      overflow: hidden;
-      background: var(--wa-bg);
-      display: flex;
-      flex-direction: column;
-    }
-    .wa-header {
-      background: var(--wa-header);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .wa-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: white;
-      flex-shrink: 0;
-    }
-    .wa-name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: white;
-      line-height: 1.2;
-    }
-    .wa-status {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.7);
-    }
-    .wa-chat {
-      flex: 1;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: var(--wa-bg);
-      background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
-    }
-    .wa-bubble {
-      max-width: 88%;
-      padding: 6px 10px 4px;
-      border-radius: 8px;
-      font-size: 0.7rem;
-      line-height: 1.45;
-      position: relative;
-    }
-    .wa-bubble.in {
-      background: white;
-      align-self: flex-start;
-      border-top-left-radius: 2px;
-      box-shadow: 0 1px 1px rgba(44,37,34,0.06);
-    }
-    .wa-bubble.out {
-      background: var(--green-light);
-      align-self: flex-end;
-      border-top-right-radius: 2px;
-      box-shadow: 0 1px 1px rgba(44,37,34,0.06);
-    }
-    .wa-time {
-      font-size: 0.58rem;
-      color: #999;
-      text-align: right;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 3px;
-    }
-    .wa-ticks { color: #4fc3f7; font-size: 0.62rem; }
+    /* ─── Activities ─── */
+    .activities { background: var(--cream); padding: 100px 28px; text-align: center; }
+    .activities h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 10px; }
+    .activities .sub { color: var(--text-soft); font-size: 1.05rem; margin-bottom: 48px; }
+    .activities-img { max-width: 420px; margin: 0 auto 48px; }
+    .marquee-wrap { overflow: hidden; margin: 0 -28px; padding: 8px 0; }
+    .marquee { display: flex; gap: 12px; animation: marquee-scroll 35s linear infinite; width: max-content; }
+    .pill { white-space: nowrap; padding: 9px 22px; border: 1.5px solid var(--border); border-radius: 99px; font-size: .82rem; font-weight: 500; color: var(--text-mid); background: rgba(255,255,255,.6); flex-shrink: 0; }
 
-    .phone-float { animation: float 6s ease-in-out infinite; }
+    /* ─── Memory demo ─── */
+    .memory { padding: 100px 28px; max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .memory h2 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 14px; }
+    .memory .sub { color: var(--text-soft); font-size: 1.05rem; margin-bottom: 40px; line-height: 1.7; }
+    .memory .phone-frame { width: 240px; margin: 0 auto; }
+    .memory-right { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .memory-right img { max-width: 300px; filter: drop-shadow(0 16px 32px rgba(44,37,34,.07)); }
+    .testimonial { max-width: 400px; text-align: center; }
+    .testimonial q { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1rem; line-height: 1.7; color: var(--text-mid); display: block; margin-bottom: 12px; }
+    .testimonial cite { font-style: normal; font-size: .82rem; color: var(--text-faint); }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
-    #hero {
-      padding-top: 64px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute;
-      top: 50%;
-      right: 10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse at center, rgba(37,211,102,0.04) 0%, transparent 70%);
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 80px 24px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    @media (min-width: 1024px) {
-      .hero-inner {
-        grid-template-columns: 55fr 45fr;
-        gap: 60px;
-      }
-    }
-    .hero-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .hero-h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 400;
-      line-height: 1.08;
-      color: var(--text);
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-    }
-    .hero-sub {
-      font-size: 18px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 40px;
-      max-width: 520px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-    .hero-ctas-note {
-      width: 100%;
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
-      font-family: 'DM Sans', sans-serif;
-    }
+    /* ─── Steps ─── */
+    .steps-section { background: var(--cream); padding: 100px 28px; text-align: center; }
+    .steps-section h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 56px; }
+    .steps { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .step-num { font-family: 'DM Serif Display', serif; font-size: 4rem; color: var(--border-light); line-height: 1; margin-bottom: 14px; }
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: .9rem; color: var(--text-soft); line-height: 1.6; }
 
-    /* Hero visual: illustration floating naturally */
-    .hero-visual {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero-illustration {
-      max-width: 420px;
-      width: 100%;
-      /* No border, no shadow, no frame — floats naturally */
-    }
+    /* ─── Pricing ─── */
+    .pricing { padding: 100px 28px; text-align: center; }
+    .pricing h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 10px; }
+    .pricing .sub { color: var(--text-soft); font-size: 1.05rem; margin-bottom: 48px; }
+    .price-card { max-width: 440px; margin: 0 auto; background: #fff; border: 1.5px solid var(--border); border-radius: 20px; padding: 44px 36px; text-align: left; }
+    .badge { display: inline-block; background: var(--green); color: #fff; font-size: .78rem; font-weight: 600; padding: 5px 16px; border-radius: 99px; margin-bottom: 28px; }
+    .features { list-style: none; margin-bottom: 32px; }
+    .features li { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-light); font-size: .92rem; color: var(--text); line-height: 1.5; }
+    .features li:last-child { border: none; }
+    .features li::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+    .price-cta { width: 100%; justify-content: center; margin-bottom: 20px; }
+    .price-gift { text-align: center; font-size: .88rem; color: var(--text-soft); margin-bottom: 16px; }
+    .price-gift a { color: var(--text-mid); text-decoration: underline; text-underline-offset: 3px; }
+    .price-gift a:hover { color: var(--green); }
+    .price-note { text-align: center; font-size: .78rem; color: var(--text-faint); }
 
-    /* ============================================================
-       EDITORIAL — "WHAT IS MALLITAS"
-    ============================================================ */
-    #que-es {
-      padding: 100px 24px;
-      background: var(--bg);
-    }
-    .editorial {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .editorial-line {
-      width: 60px;
-      height: 2px;
-      background: var(--border);
-      margin: 0 auto 48px;
-    }
-    .editorial h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 36px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 40px;
-      line-height: 1.25;
-    }
-    .editorial p {
-      font-size: 17px;
-      color: var(--text-editorial);
-      line-height: 1.9;
-      margin-bottom: 24px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .editorial p:last-of-type {
-      color: var(--text);
-      font-weight: 500;
-      font-size: 17px;
-    }
-    .editorial-illustration {
-      max-width: 280px;
-      margin: 40px auto 0;
-      /* No border, no shadow — floats naturally */
-    }
+    /* ─── Footer ─── */
+    footer { background: var(--footer-bg); padding: 44px 28px; text-align: center; }
+    .f-logo { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.2rem; color: #c4b8ac; margin-bottom: 16px; }
+    .f-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    .f-links a { font-size: .82rem; color: #a39990; transition: color .2s; }
+    .f-links a:hover { color: #c4b8ac; }
+    .f-copy { font-size: .72rem; color: #7a706a; }
 
-    /* ============================================================
-       ACTIVITIES
-    ============================================================ */
-    #actividades {
-      padding: 100px 24px;
-      background: var(--bg-cream);
-    }
-    .actividades-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 48px;
-    }
-    .actividades-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.25;
-    }
-    .actividades-header p {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      font-family: 'DM Sans', sans-serif;
-    }
-    .actividades-illustration {
-      max-width: 500px;
-      margin: 0 auto 48px;
-      display: block;
-      /* No border, no shadow — watercolor icons ARE the design */
-    }
-    .marquee-wrap {
-      overflow: hidden;
-      padding: 20px 0;
-    }
-    .marquee-track {
-      display: flex;
-      gap: 12px;
-      width: max-content;
-      animation: marquee 30s linear infinite;
-    }
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-    .pill {
-      white-space: nowrap;
-      padding: 8px 20px;
-      background: white;
-      border: 1.5px solid #d4cdc4;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-editorial);
-      font-family: 'DM Sans', sans-serif;
-    }
+    /* ─── Phone ─── */
+    .phone-frame { background: #2a2a2a; border-radius: 36px; padding: 10px; position: relative; box-shadow: 0 30px 60px rgba(44,37,34,.12), 0 10px 20px rgba(44,37,34,.08); }
+    .phone-frame::before { content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 70px; height: 22px; background: #1a1a1a; border-radius: 12px; z-index: 2; }
+    .phone-screen { border-radius: 28px; overflow: hidden; background: var(--wa-bg); }
+    .wa-head { background: var(--wa-header); padding: 8px 12px; display: flex; align-items: center; gap: 8px; }
+    .wa-av { width: 30px; height: 30px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: .8rem; color: #fff; font-weight: 700; }
+    .wa-info .name { font-size: .75rem; color: #fff; font-weight: 600; }
+    .wa-info .status { font-size: .6rem; color: rgba(255,255,255,.65); }
+    .chat { padding: 8px; display: flex; flex-direction: column; gap: 3px; }
+    .b { max-width: 85%; padding: 5px 8px 3px; border-radius: 6px; font-size: .65rem; line-height: 1.45; }
+    .b.i { background: #fff; align-self: flex-start; border-bottom-left-radius: 1px; }
+    .b.o { background: var(--green-light); align-self: flex-end; border-bottom-right-radius: 1px; }
+    .t { font-size: .5rem; color: #999; text-align: right; margin-top: 1px; }
+    .ticks { color: #4fc3f7; }
+    .float { animation: gentle-float 6s ease-in-out infinite; }
 
-    /* ============================================================
-       MEMORY DEMO
-    ============================================================ */
-    #memory {
-      background: var(--bg);
-      padding: 100px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .memory-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    .memory-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      align-items: center;
-      justify-items: center;
-      margin-bottom: 56px;
-    }
-    @media (min-width: 768px) {
-      .memory-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 56px;
-      }
-    }
-    .memory-left-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 40px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.25;
-    }
-    .memory-left-header p {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      font-family: 'DM Sans', sans-serif;
-      margin-bottom: 32px;
-    }
-    .memory-illustration {
-      max-width: 340px;
-      width: 100%;
-      /* No border, no frame — floats naturally */
-    }
-
-    /* Testimonial */
-    .testimonial {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .testimonial-text {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 18px;
-      color: var(--text-editorial);
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-    .testimonial-name {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* ============================================================
-       HOW IT WORKS
-    ============================================================ */
-    #como-funciona {
-      background: var(--bg-cream);
-      padding: 100px 24px;
-    }
-    .steps-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    .steps-inner > h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 400;
-      color: var(--text);
-      text-align: center;
-      margin-bottom: 64px;
-    }
-    .steps-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-    }
-    @media (min-width: 768px) {
-      .steps-row {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 56px;
-      }
-    }
-    .step {
-      text-align: center;
-    }
-    .step-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 72px;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-    .step h3 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .step p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ============================================================
-       PRICING
-    ============================================================ */
-    #precio {
-      padding: 100px 24px;
-      background: var(--bg);
-    }
-    .pricing-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      text-align: center;
-    }
-    .pricing-inner > h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 32px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-    .pricing-sub {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .pricing-card {
-      max-width: 460px;
-      margin: 0 auto;
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 48px 40px;
-      text-align: left;
-    }
-    .pricing-badge {
-      display: inline-block;
-      background: var(--green);
-      color: white;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-    }
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 36px;
-    }
-    .pricing-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.5;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .pricing-features li:last-child { border-bottom: none; }
-    .check-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .pricing-cta {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .pricing-cta .btn-green {
-      width: 100%;
-      justify-content: center;
-    }
-    .pricing-gift {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .pricing-gift a {
-      color: var(--text-editorial);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-    .pricing-gift a:hover { color: var(--green-dark); }
-    .pricing-note {
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    #footer {
-      background: var(--footer-bg);
-      padding: 48px 24px;
-    }
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      text-align: center;
-    }
-    .footer-logo {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: var(--footer-text);
-    }
-    .footer-links {
-      display: flex;
-      gap: 28px;
-    }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--footer-link);
-      transition: color 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .footer-links a:hover { color: var(--footer-text); }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--footer-copy);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 1023px) {
-      .hero-illustration {
-        max-width: 340px;
-      }
-    }
+    /* ─── Responsive ─── */
     @media (max-width: 768px) {
-      .hero-ctas {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-green, .btn-outline {
-        justify-content: center;
-      }
-      .pricing-card {
-        padding: 36px 24px;
-      }
-      .hero-illustration {
-        max-width: 280px;
-      }
-      .memory-grid {
-        gap: 32px;
-      }
-      .memory-left-header h2 {
-        font-size: 32px;
-      }
-      .actividades-illustration {
-        max-width: 360px;
-      }
-      .editorial-illustration {
-        max-width: 220px;
-      }
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; gap: 40px; }
+      .hero p { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+      .hero-visual img { max-width: 280px; margin: 0 auto; }
+      .memory { grid-template-columns: 1fr; text-align: center; }
+      .memory .phone-frame { width: 200px; }
+      .memory-right img { max-width: 220px; }
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .editorial-img { max-width: 200px; }
+      .activities-img { max-width: 300px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav" role="navigation" aria-label="Navegaci&oacute;n principal">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">Mallitas</a>
-      <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="nav-cta" target="_blank" rel="noopener">
-        Pru&eacute;balo gratis
-      </a>
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-bar">
+      <a href="#" class="logo">Mallitas</a>
+      <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="cta-pill" target="_blank" rel="noopener">Pruébalo gratis</a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero" aria-label="Presentaci&oacute;n">
-    <div class="hero-glow"></div>
-    <div class="hero-inner">
-
-      <div>
-        <div class="hero-label fade-up">COMPA&Ntilde;&Iacute;A POR WHATSAPP</div>
-        <h1 class="hero-h1 fade-up d1">Que nadie que quieras est&eacute; solo</h1>
-        <p class="hero-sub fade-up d2">
-          Mallitas habla con tu padre, tu madre, tu abuelo. Cada d&iacute;a. Por WhatsApp. De lo que a ellos les importa.
-        </p>
-        <div class="hero-ctas fade-up d3">
-          <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn-green" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Pru&eacute;balo gratis 15 d&iacute;as
-          </a>
-          <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" class="btn-outline" target="_blank" rel="noopener">
-            Reg&aacute;laselo
-          </a>
-          <span class="hero-ctas-note">Sin instalar nada &middot; Solo WhatsApp</span>
-        </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-label reveal">Compañía por WhatsApp</div>
+      <h1 class="reveal d1">Que nadie que quieras esté solo</h1>
+      <p class="reveal d2">Mallitas habla con tu padre, tu madre, tu abuelo. Cada día. Por WhatsApp. De lo que a ellos les importa.</p>
+      <div class="hero-btns reveal d3">
+        <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn btn-g" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.694-1.222A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.684-6.058-1.853l-.424-.294-2.907.757.756-2.76-.32-.457A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          Pruébalo gratis 15 días
+        </a>
+        <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" class="btn btn-o" target="_blank" rel="noopener">Regálaselo</a>
       </div>
-
-      <!-- Hero visual: abuela-1 watercolor illustration -->
-      <div class="hero-visual fade-up d4">
-        <img
-          src="img/abuela-1.png"
-          alt="Abuela en su sill&oacute;n hablando por WhatsApp con Mallitas"
-          class="hero-illustration"
-          loading="eager"
-        />
-      </div>
-
+      <div class="hero-note reveal d3">Sin instalar nada · Solo WhatsApp</div>
+    </div>
+    <div class="hero-visual reveal d2">
+      <img src="img/abuela-1.png" alt="Ilustración de abuela con Mallitas" width="400" height="560">
     </div>
   </section>
 
-  <!-- WHAT IS MALLITAS — EDITORIAL -->
-  <section id="que-es" aria-label="Qu&eacute; es Mallitas">
-    <div class="editorial">
-      <div class="editorial-line fade-up"></div>
-      <h2 class="fade-up d1">Un amigo que siempre tiene tiempo</h2>
-      <p class="fade-up d2">
-        Mallitas es un compa&ntilde;ero que vive en WhatsApp. No hace falta instalar nada. No hace falta aprender nada nuevo. Solo hablar, como con un amigo de toda la vida.
-      </p>
-      <p class="fade-up d3">
-        Cada ma&ntilde;ana, Mallitas saluda. Pregunta c&oacute;mo est&aacute;s. Recuerda que ayer ten&iacute;as cita con el m&eacute;dico. Sabe que tu equipo gan&oacute; anoche. Se acuerda de la receta de croquetas que le contaste el martes.
-      </p>
-      <p class="fade-up d4">
-        No es un chatbot. No es una app. Es compa&ntilde;&iacute;a de verdad, cada d&iacute;a.
-      </p>
-      <img
-        src="img/abuela-2.png"
-        alt="Abuela con chaqueta verde usando WhatsApp"
-        class="editorial-illustration fade-up"
-        loading="lazy"
-      />
-    </div>
+  <!-- Editorial -->
+  <section class="editorial">
+    <h2 class="reveal">Un amigo que siempre tiene tiempo</h2>
+    <p class="reveal d1">Mallitas es un compañero que vive en WhatsApp. No hace falta instalar nada. No hace falta aprender nada nuevo. Solo hablar, como con un amigo de toda la vida.</p>
+    <p class="reveal d2">Cada mañana, Mallitas saluda. Pregunta cómo estás. Recuerda que ayer tenías cita con el médico. Sabe que tu equipo ganó anoche. Se acuerda de la receta de croquetas que le contaste el martes.</p>
+    <p class="reveal d3">No es un chatbot. No es una app. Es compañía de verdad.</p>
+    <img src="img/abuela-2.png" alt="" class="editorial-img reveal" width="260" height="364">
   </section>
 
-  <!-- ACTIVITIES -->
-  <section id="actividades" aria-label="Actividades">
-    <div class="actividades-header fade-up">
-      <h2>Cada persona es un mundo</h2>
-      <p>Mallitas se adapta a lo que a cada uno le gusta</p>
-    </div>
-
-    <img
-      src="img/icons-1.png"
-      alt="Iconos en acuarela: rezar, cocinar, leer, f&uacute;tbol, crucigramas, escribir, pasear, caminar"
-      class="actividades-illustration fade-up d1"
-      loading="lazy"
-    />
-
-    <div class="marquee-wrap fade-up d2">
-      <div class="marquee-track" aria-hidden="true">
-        <span class="pill">Rezar juntos</span>
-        <span class="pill">Cantar</span>
-        <span class="pill">Cocinar</span>
-        <span class="pill">F&uacute;tbol</span>
-        <span class="pill">Libro de vida</span>
-        <span class="pill">Crucigramas</span>
-        <span class="pill">Paseos</span>
-        <span class="pill">Medicaci&oacute;n</span>
-        <span class="pill">Poes&iacute;a</span>
-        <span class="pill">Karaoke</span>
-        <span class="pill">Trivial</span>
-        <span class="pill">Recetario</span>
-        <span class="pill">Santos del d&iacute;a</span>
-        <span class="pill">Citas m&eacute;dicas</span>
-        <span class="pill">Fotos</span>
-        <!-- duplicate for seamless loop -->
-        <span class="pill">Rezar juntos</span>
-        <span class="pill">Cantar</span>
-        <span class="pill">Cocinar</span>
-        <span class="pill">F&uacute;tbol</span>
-        <span class="pill">Libro de vida</span>
-        <span class="pill">Crucigramas</span>
-        <span class="pill">Paseos</span>
-        <span class="pill">Medicaci&oacute;n</span>
-        <span class="pill">Poes&iacute;a</span>
-        <span class="pill">Karaoke</span>
-        <span class="pill">Trivial</span>
-        <span class="pill">Recetario</span>
-        <span class="pill">Santos del d&iacute;a</span>
-        <span class="pill">Citas m&eacute;dicas</span>
-        <span class="pill">Fotos</span>
+  <!-- Activities -->
+  <section class="activities">
+    <h2 class="reveal">Cada persona es un mundo</h2>
+    <p class="sub reveal d1">Mallitas se adapta a lo que a cada uno le gusta</p>
+    <img src="img/icons-1.png" alt="Actividades: rezar, cocinar, leer, fútbol, crucigramas, pasear" class="activities-img reveal d2" width="420" height="588">
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <span class="pill">Rezar juntos</span><span class="pill">Cantar</span><span class="pill">Cocinar</span><span class="pill">Fútbol</span><span class="pill">Libro de vida</span><span class="pill">Crucigramas</span><span class="pill">Paseos</span><span class="pill">Medicación</span><span class="pill">Poesía</span><span class="pill">Karaoke</span><span class="pill">Trivial</span><span class="pill">Recetario</span><span class="pill">Santos del día</span><span class="pill">Citas médicas</span><span class="pill">Fotos</span>
+        <span class="pill">Rezar juntos</span><span class="pill">Cantar</span><span class="pill">Cocinar</span><span class="pill">Fútbol</span><span class="pill">Libro de vida</span><span class="pill">Crucigramas</span><span class="pill">Paseos</span><span class="pill">Medicación</span><span class="pill">Poesía</span><span class="pill">Karaoke</span><span class="pill">Trivial</span><span class="pill">Recetario</span><span class="pill">Santos del día</span><span class="pill">Citas médicas</span><span class="pill">Fotos</span>
       </div>
     </div>
   </section>
 
-  <!-- MEMORY DEMO -->
-  <section id="memory" aria-label="Memoria">
-    <div class="memory-inner">
-
-      <div class="memory-grid">
-        <!-- Left: header + phone -->
-        <div class="fade-up d1">
-          <div class="memory-left-header">
-            <h2>Recuerda todo</h2>
-            <p>Nombres, recetas, fechas. Cada conversaci&oacute;n importa.</p>
+  <!-- Memory demo -->
+  <section class="memory">
+    <div>
+      <h2 class="reveal">Recuerda todo</h2>
+      <p class="sub reveal d1">Nombres, recetas, fechas, historias. Cada conversación importa.</p>
+      <div class="phone-frame float reveal d2" style="width:240px">
+        <div class="phone-screen">
+          <div class="wa-head">
+            <div class="wa-av">M</div>
+            <div class="wa-info"><div class="name">Mallitas</div><div class="status">en línea</div></div>
           </div>
-          <div class="phone-float">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <div class="wa-header">
-                  <div class="wa-avatar">M</div>
-                  <div>
-                    <div class="wa-name">Mallitas</div>
-                    <div class="wa-status">en l&iacute;nea</div>
-                  </div>
-                </div>
-                <div class="wa-chat">
-                  <div class="wa-bubble in">
-                    Buenas tardes, Carmen &#128522; &iquest;Qu&eacute; tal las croquetas? Me dijiste el martes que les faltaba nuez moscada.
-                    <div class="wa-time">16:20</div>
-                  </div>
-                  <div class="wa-bubble out">
-                    &iexcl;Las repet&iacute; y salieron bordadas!
-                    <div class="wa-time">16:22 <span class="wa-ticks">&#10003;&#10003;</span></div>
-                  </div>
-                  <div class="wa-bubble in">
-                    &iexcl;Qu&eacute; alegr&iacute;a! &#128221; Ma&ntilde;ana cumple 8 a&ntilde;os tu nieta Luc&iacute;a.
-                    <div class="wa-time">16:22</div>
-                  </div>
-                  <div class="wa-bubble out">
-                    &iexcl;Tengo que llamar a mi hijo!
-                    <div class="wa-time">16:24 <span class="wa-ticks">&#10003;&#10003;</span></div>
-                  </div>
-                  <div class="wa-bubble in">
-                    Me contaste que a Luc&iacute;a le encantan los puzzles. &iquest;Te recuerdo llamar a Carlos a las 19:00?
-                    <div class="wa-time">16:24</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="chat">
+            <div class="b i">Buenas tardes, Carmen 😊 ¿Qué tal las croquetas? Me dijiste el martes que les faltaba nuez moscada.<div class="t">16:20</div></div>
+            <div class="b o">¡Las repetí y salieron bordadas!<div class="t">16:22 <span class="ticks">✓✓</span></div></div>
+            <div class="b i">¡Qué alegría! La guardo en tu recetario 📝 Mañana cumple 8 años tu nieta Lucía.<div class="t">16:22</div></div>
+            <div class="b o">¡Tengo que llamar a mi hijo!<div class="t">16:24 <span class="ticks">✓✓</span></div></div>
+            <div class="b i">Me contaste que a Lucía le encantan los puzzles. ¿Te recuerdo llamar a Carlos a las 19:00?<div class="t">16:24</div></div>
           </div>
         </div>
-
-        <!-- Right: manos-2 illustration -->
-        <div class="fade-up d2" style="display:flex;align-items:center;justify-content:center;">
-          <img
-            src="img/manos-2.png"
-            alt="Manos sosteniendo un tel&eacute;fono con coraz&oacute;n"
-            class="memory-illustration"
-            loading="lazy"
-          />
-        </div>
       </div>
-
-      <!-- Testimonial -->
-      <div class="testimonial fade-up d3">
-        <p class="testimonial-text">
-          &laquo;Mi madre vive sola en el pueblo. Desde que tiene a Mallitas, me llama para contarme lo que han hablado. Est&aacute; m&aacute;s animada que nunca.&raquo;
-        </p>
-        <p class="testimonial-name">&mdash; Laura M., Madrid</p>
+    </div>
+    <div class="memory-right">
+      <img src="img/manos-2.png" alt="Manos sosteniendo un móvil con cariño" class="reveal" width="300" height="420">
+      <div class="testimonial reveal d1">
+        <q>Mi madre vive sola en el pueblo. Desde que tiene a Mallitas, me llama para contarme lo que han hablado. Está más animada que nunca.</q>
+        <cite>— Laura M., Madrid</cite>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="como-funciona" aria-label="C&oacute;mo funciona">
-    <div class="steps-inner">
-      <h2 class="fade-up">As&iacute; de f&aacute;cil</h2>
-      <div class="steps-row">
-        <div class="step fade-up">
-          <div class="step-num">01</div>
-          <h3>Danos su WhatsApp</h3>
-          <p>Solo el n&uacute;mero. Sin apps, sin registro.</p>
-        </div>
-        <div class="step fade-up d1">
-          <div class="step-num">02</div>
-          <h3>Mallitas se presenta</h3>
-          <p>Le escribe y le conoce poco a poco.</p>
-        </div>
-        <div class="step fade-up d2">
-          <div class="step-num">03</div>
-          <h3>Se adapta</h3>
-          <p>Cada d&iacute;a, habla de lo que le importa.</p>
-        </div>
+  <!-- Steps -->
+  <section class="steps-section">
+    <h2 class="reveal">Así de fácil</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Danos su WhatsApp</h3>
+        <p>Solo el número. Sin apps, sin registro.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">02</div>
+        <h3>Mallitas se presenta</h3>
+        <p>Le escribe y le conoce poco a poco.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">03</div>
+        <h3>Se adapta</h3>
+        <p>Cada día, habla de lo que le importa.</p>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section id="precio" aria-label="Precio">
-    <div class="pricing-inner">
-      <h2 class="fade-up">15 d&iacute;as gratis. Despu&eacute;s, 4,90&euro; al mes.</h2>
-      <p class="pricing-sub fade-up d1">Un caf&eacute; a la semana. Sin permanencia.</p>
-
-      <div class="pricing-card fade-up d2">
-        <div class="pricing-badge">15 d&iacute;as gratis</div>
-
-        <ul class="pricing-features">
-          <li>
-            <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
-              <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Conversaci&oacute;n diaria personalizada
-          </li>
-          <li>
-            <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
-              <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            28 actividades adaptadas a sus gustos
-          </li>
-          <li>
-            <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
-              <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Memoria real &mdash; recuerda todo
-          </li>
-          <li>
-            <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
-              <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Recordatorios amables de medicaci&oacute;n
-          </li>
-          <li>
-            <svg class="check-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="10" cy="10" r="10" fill="#f0fdf4"/>
-              <path d="M6 10l3 3 5-5" stroke="#25D366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Funciona en WhatsApp, sin instalar nada
-          </li>
-        </ul>
-
-        <div class="pricing-cta">
-          <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn-green" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Pru&eacute;balo gratis 15 d&iacute;as
-          </a>
-        </div>
-
-        <p class="pricing-gift">
-          &iquest;Quieres regal&aacute;rselo a alguien? <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" target="_blank" rel="noopener">Escr&iacute;benos.</a>
-        </p>
-        <p class="pricing-note">Sin datos compartidos. Sin anuncios. Solo compa&ntilde;&iacute;a.</p>
+  <!-- Pricing -->
+  <section class="pricing">
+    <h2 class="reveal">15 días gratis. Después, 4,90€ al mes.</h2>
+    <p class="sub reveal d1">Un café a la semana. Sin permanencia.</p>
+    <div class="price-card reveal d2">
+      <div class="badge">15 días gratis</div>
+      <ul class="features">
+        <li>Conversación diaria personalizada</li>
+        <li>28 actividades adaptadas a sus gustos</li>
+        <li>Memoria real — recuerda todo</li>
+        <li>Recordatorios amables de medicación</li>
+        <li>Funciona en WhatsApp, sin instalar nada</li>
+      </ul>
+      <div class="price-cta">
+        <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Mallitas" class="btn btn-g price-cta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.694-1.222A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.684-6.058-1.853l-.424-.294-2.907.757.756-2.76-.32-.457A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          Pruébalo gratis 15 días
+        </a>
       </div>
+      <p class="price-gift">¿Quieres regalárselo a alguien? <a href="https://wa.me/XXXXXXXXXXX?text=Quiero%20regalar%20Mallitas" target="_blank" rel="noopener">Escríbenos</a></p>
+      <p class="price-note">Sin datos compartidos. Sin anuncios. Solo compañía.</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="footer" aria-label="Pie de p&aacute;gina">
-    <div class="footer-inner">
-      <div class="footer-logo">Mallitas</div>
-      <nav class="footer-links" aria-label="Enlaces del pie">
-        <a href="#">Privacidad</a>
-        <a href="mailto:hola@mallitas.es">Contacto</a>
-      </nav>
-      <p class="footer-copy">&copy; 2026 Mallitas</p>
+  <!-- Footer -->
+  <footer>
+    <div class="f-logo">Mallitas</div>
+    <div class="f-links">
+      <a href="#">Privacidad</a>
+      <a href="mailto:hola@mallitas.es">Contacto</a>
     </div>
+    <div class="f-copy">© 2026 Mallitas</div>
   </footer>
 
-  <!-- JS -->
   <script>
-    // Scroll-triggered fade-ins
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            observer.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    // Nav border on scroll
+    // Nav scroll
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+    addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
   </script>
-
 </body>
 </html>
